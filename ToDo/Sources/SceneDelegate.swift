@@ -2,12 +2,15 @@
 //  SceneDelegate.swift
 //  ToDo
 //
-//  Created by Sergei Fabian on 18.10.2025.
+//  Created by Sergei Fabian on 20.10.2025.
 //
 
 import UIKit
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
+    private lazy var dependencies = DependenciesContainer()
+    private lazy var factories = FactoriesContainer(dependencies: dependencies)
 
     var window: UIWindow?
 
@@ -18,6 +21,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         if let windowScene = scene as? UIWindowScene {
             window = UIWindow(windowScene: windowScene)
+            window?.rootViewController = factories.makeListModule()
             window?.makeKeyAndVisible()
         }
     }
