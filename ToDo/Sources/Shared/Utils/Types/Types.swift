@@ -10,3 +10,6 @@ import UIKit
 typealias EmptyClosure = () -> Void
 typealias TypeClosure<T> = (T) -> Void
 typealias ResultClosure<T> = (Result<T, Error>) -> Void
+
+typealias ToDoListDataSource = UITableViewDiffableDataSource<ToDoListSection, ToDoListItem>
+typealias ToDoListSnapshot = NSDiffableDataSourceSnapshot<ToDoListSection, ToDoListItem>
