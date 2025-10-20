@@ -13,6 +13,14 @@ struct ToDo: Identifiable {
     let details: String?
     let completed: Bool
     let date: Date
+
+    func updating(title: String) -> ToDo {
+        ToDo(id: id, title: title, details: details, completed: completed, date: date)
+    }
+
+    func updating(details: String) -> ToDo {
+        ToDo(id: id, title: title, details: details, completed: completed, date: date)
+    }
 }
 
 extension ToDo {
