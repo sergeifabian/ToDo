@@ -165,7 +165,7 @@ extension ToDoListViewController: ToDoListView {
     func setSnapshot(_ snapshot: ToDoListSnapshot) {
         statusActivityIndicatorView.stopAnimating()
         statusLabel.text = L10n.List.Status.tasks(snapshot.numberOfItems)
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
     func setLoadingError(_ error: any Error) {
