@@ -7,18 +7,18 @@
 
 import Foundation
 
-protocol URLRequestBuilder {
+public protocol URLRequestBuilder {
     func build<E: HTTPEndpoint>(endpoint: E) throws -> URLRequest
 }
 
-final class URLRequestBuilderImpl: URLRequestBuilder {
+public final class URLRequestBuilderImpl: URLRequestBuilder {
     private let urlBuilder: URLBuilder
 
-    init(urlBuilder: URLBuilder) {
+    public init(urlBuilder: URLBuilder) {
         self.urlBuilder = urlBuilder
     }
 
-    func build<E: HTTPEndpoint>(endpoint: E) throws -> URLRequest {
+    public func build<E: HTTPEndpoint>(endpoint: E) throws -> URLRequest {
         try URLRequest(url: urlBuilder.build(endpoint: endpoint), httpMethod: endpoint.httpMethod)
     }
 }

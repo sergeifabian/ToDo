@@ -7,8 +7,12 @@
 
 import Foundation
 
-struct HTTPMethod: RawRepresentable {
-    static let get = HTTPMethod(rawValue: "GET")
+public struct HTTPMethod: RawRepresentable {
+    public static let get = HTTPMethod(rawValue: "GET")
 
-    let rawValue: String
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
 }

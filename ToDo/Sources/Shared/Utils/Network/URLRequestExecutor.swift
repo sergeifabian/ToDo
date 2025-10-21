@@ -7,18 +7,18 @@
 
 import Foundation
 
-protocol URLRequestExecutor {
+public protocol URLRequestExecutor {
     func execute(request: URLRequest, completion: @escaping ResultClosure<HTTPResponse>)
 }
 
-final class URLRequestExecutorImpl: URLRequestExecutor {
+public final class URLRequestExecutorImpl: URLRequestExecutor {
     private let urlSession: URLSession
 
-    init(urlSession: URLSession) {
+    public init(urlSession: URLSession) {
         self.urlSession = urlSession
     }
 
-    func execute(request: URLRequest, completion: @escaping ResultClosure<HTTPResponse>) {
+    public func execute(request: URLRequest, completion: @escaping ResultClosure<HTTPResponse>) {
         let task = urlSession.dataTask(with: request) { data, urlResponse, error in
             if let error {
                 completion(.failure(error))

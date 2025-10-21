@@ -7,6 +7,6 @@
 
 import Foundation
 
-nonisolated enum ToDoListSection: Hashable, Sendable {
+public nonisolated enum ToDoListSection: Hashable, Sendable {
     case main
 }

@@ -7,14 +7,22 @@
 
 import Foundation
 
-nonisolated struct ToDoListItem: Hashable, Sendable {
-    let id: String
-    let title: String?
-    let details: String?
-    let completed: Bool
-    let date: String
+public nonisolated struct ToDoListItem: Hashable, Sendable {
+    public let id: String
+    public let title: String?
+    public let details: String?
+    public let completed: Bool
+    public let date: String
 
-    static func mapFromDomain(_ model: ToDo) -> ToDoListItem {
+    public init(id: String, title: String?, details: String?, completed: Bool, date: String) {
+        self.id = id
+        self.title = title
+        self.details = details
+        self.completed = completed
+        self.date = date
+    }
+
+    public static func mapFromDomain(_ model: ToDo) -> ToDoListItem {
         ToDoListItem(
             id: model.id,
             title: model.title,
@@ -25,7 +33,7 @@ nonisolated struct ToDoListItem: Hashable, Sendable {
     }
 }
 
-extension ToDoListItem {
+public extension ToDoListItem {
     static var initial: ToDoListItem {
         ToDoListItem(
             id: String(),

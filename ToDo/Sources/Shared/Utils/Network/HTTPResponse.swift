@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct HTTPResponse {
-    let data: Data
-    let httpURLResponse: HTTPURLResponse
+public struct HTTPResponse {
+    public let data: Data
+    public let httpURLResponse: HTTPURLResponse
+
+    public init(data: Data, httpURLResponse: HTTPURLResponse) {
+        self.data = data
+        self.httpURLResponse = httpURLResponse
+    }
 }

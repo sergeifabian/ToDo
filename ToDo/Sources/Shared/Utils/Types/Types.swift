@@ -7,9 +7,9 @@
 
 import UIKit
 
-typealias EmptyClosure = () -> Void
-typealias TypeClosure<T> = (T) -> Void
-typealias ResultClosure<T> = (Result<T, Error>) -> Void
+public typealias EmptyClosure = () -> Void
+public typealias TypeClosure<T> = (T) -> Void
+public typealias ResultClosure<T> = (Result<T, Error>) -> Void
 
-typealias ToDoListDataSource = UITableViewDiffableDataSource<ToDoListSection, ToDoListItem>
-typealias ToDoListSnapshot = NSDiffableDataSourceSnapshot<ToDoListSection, ToDoListItem>
+public typealias ToDoListDataSource = UITableViewDiffableDataSource<ToDoListSection, ToDoListItem>
+public typealias ToDoListSnapshot = NSDiffableDataSourceSnapshot<ToDoListSection, ToDoListItem>

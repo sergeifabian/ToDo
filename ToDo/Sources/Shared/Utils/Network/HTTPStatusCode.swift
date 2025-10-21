@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum HTTPStatusCode {
-    static let acceptableStatusCodes = 200 ..< 300
+public enum HTTPStatusCode {
+    public static let acceptableStatusCodes = 200 ..< 300
 }

@@ -7,17 +7,17 @@
 
 import Foundation
 
-protocol NetworkClient {
+public protocol NetworkClient {
     func request<E: HTTPEndpoint, V: Decodable>(_ endpoint: E,  completion: @escaping ResultClosure<V>)
 }
 
-final class NetworkClientImpl: NetworkClient {
+public final class NetworkClientImpl: NetworkClient {
     private let urlRequestBuilder: URLRequestBuilder
     private let urlRequestExecutor: URLRequestExecutor
     private let httpResponseValidator: HTTPResponseValidator
     private let httpResponseParser: HTTPResponseParser
 
-    init(
+    public init(
         urlRequestBuilder: URLRequestBuilder,
         urlRequestExecutor: URLRequestExecutor,
         httpResponseValidator: HTTPResponseValidator,
@@ -29,7 +29,7 @@ final class NetworkClientImpl: NetworkClient {
         self.httpResponseParser = httpResponseParser
     }
 
-    func request<E: HTTPEndpoint, V: Decodable>(_ endpoint: E, completion: @escaping ResultClosure<V>) {
+    public func request<E: HTTPEndpoint, V: Decodable>(_ endpoint: E, completion: @escaping ResultClosure<V>) {
         requestInternal(endpoint) { [weak self] result in
             guard let self else { return }
 

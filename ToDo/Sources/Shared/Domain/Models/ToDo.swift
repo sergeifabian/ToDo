@@ -7,23 +7,23 @@
 
 import Foundation
 
-struct ToDo: Identifiable {
-    let id: String
-    let title: String?
-    let details: String?
-    let completed: Bool
-    let date: Date
+public struct ToDo: Identifiable {
+    public let id: String
+    public let title: String?
+    public let details: String?
+    public let completed: Bool
+    public let date: Date
 
-    func updating(title: String) -> ToDo {
+    public func updating(title: String) -> ToDo {
         ToDo(id: id, title: title, details: details, completed: completed, date: date)
     }
 
-    func updating(details: String) -> ToDo {
+    public func updating(details: String) -> ToDo {
         ToDo(id: id, title: title, details: details, completed: completed, date: date)
     }
 }
 
-extension ToDo {
+public extension ToDo {
     static var initial: ToDo {
         ToDo(
             id: UUID().uuidString,

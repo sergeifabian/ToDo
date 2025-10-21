@@ -7,12 +7,14 @@
 
 import UIKit
 
-protocol URLBuilder {
+public protocol URLBuilder {
     func build<E: HTTPEndpoint>(endpoint: E) throws(URLError) -> URL
 }
 
-final class URLBuilderImpl: URLBuilder {
-    func build<E: HTTPEndpoint>(endpoint: E) throws(URLError) -> URL {
+public struct URLBuilderImpl: URLBuilder {
+    public init() {}
+
+    public func build<E: HTTPEndpoint>(endpoint: E) throws(URLError) -> URL {
         var urlComponents = URLComponents()
         urlComponents.scheme = UIApplication.domainScheme
         urlComponents.host = UIApplication.domainHost
