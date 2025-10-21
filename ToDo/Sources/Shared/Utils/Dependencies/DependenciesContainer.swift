@@ -18,13 +18,12 @@ final class DependenciesContainer {
 
     init() {
         let urlBuilder = URLBuilderImpl()
-        let urlRequestBuilder = URLRequestBuilderImpl(urlBuilder: urlBuilder)
         let urlRequestExecutor = URLRequestExecutorImpl(urlSession: urlSession)
         let httpResponseValidator = HTTPResponseValidatorImpl()
         let httpResponseParser = HTTPResponseParserImpl(jsonDecoder: jsonDecoder)
 
         networkClient = NetworkClientImpl(
-            urlRequestBuilder: urlRequestBuilder,
+            urlBuilder: urlBuilder,
             urlRequestExecutor: urlRequestExecutor,
             httpResponseValidator: httpResponseValidator,
             httpResponseParser: httpResponseParser

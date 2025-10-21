@@ -11,7 +11,7 @@ public protocol URLRequestExecutor {
     func execute(request: URLRequest, completion: @escaping ResultClosure<HTTPResponse>)
 }
 
-public final class URLRequestExecutorImpl: URLRequestExecutor {
+public struct URLRequestExecutorImpl: URLRequestExecutor {
     private let urlSession: URLSession
 
     public init(urlSession: URLSession) {

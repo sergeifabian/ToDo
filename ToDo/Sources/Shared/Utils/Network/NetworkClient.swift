@@ -8,31 +8,39 @@
 import Foundation
 
 public protocol NetworkClient {
-    func request<E: HTTPEndpoint, V: Decodable>(_ endpoint: E,  completion: @escaping ResultClosure<V>)
+    func request<E: HTTPEndpoint, V: Decodable>(_ endpoint: E, type: V.Type, completion: @escaping ResultClosure<V>)
 }
 
-public final class NetworkClientImpl: NetworkClient {
-    private let urlRequestBuilder: URLRequestBuilder
+public extension NetworkClient {
+    func request<E: HTTPEndpoint, V: Decodable>(_ endpoint: E, completion: @escaping ResultClosure<V>) {
+        request(endpoint, type: V.self, completion: completion)
+    }
+}
+
+public struct NetworkClientImpl: NetworkClient {
+    private let urlBuilder: URLBuilder
     private let urlRequestExecutor: URLRequestExecutor
     private let httpResponseValidator: HTTPResponseValidator
     private let httpResponseParser: HTTPResponseParser
 
     public init(
-        urlRequestBuilder: URLRequestBuilder,
+        urlBuilder: URLBuilder,
         urlRequestExecutor: URLRequestExecutor,
         httpResponseValidator: HTTPResponseValidator,
         httpResponseParser: HTTPResponseParser
     ) {
-        self.urlRequestBuilder = urlRequestBuilder
+        self.urlBuilder = urlBuilder
         self.urlRequestExecutor = urlRequestExecutor
         self.httpResponseValidator = httpResponseValidator
         self.httpResponseParser = httpResponseParser
     }
 
-    public func request<E: HTTPEndpoint, V: Decodable>(_ endpoint: E, completion: @escaping ResultClosure<V>) {
-        requestInternal(endpoint) { [weak self] result in
-            guard let self else { return }
-
+    public func request<E: HTTPEndpoint, V: Decodable>(
+        _ endpoint: E,
+        type: V.Type,
+        completion: @escaping ResultClosure<V>
+    ) {
+        requestInternal(endpoint) { result in
             do {
                 switch result {
                 case .success(let response):
@@ -49,7 +57,8 @@ public final class NetworkClientImpl: NetworkClient {
 
     private func requestInternal<E: HTTPEndpoint>(_ endpoint: E, completion: @escaping ResultClosure<HTTPResponse>) {
         do {
-            let urlRequest = try urlRequestBuilder.build(endpoint: endpoint)
+            let url = try urlBuilder.build(endpoint: endpoint)
+            let urlRequest = URLRequest(url: url, httpMethod: endpoint.httpMethod)
 
             urlRequestExecutor.execute(request: urlRequest) { result in
                 switch result {

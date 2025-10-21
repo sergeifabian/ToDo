@@ -7,6 +7,11 @@
 
 import Foundation
 
-public enum HTTPStatusCode {
+public enum HTTPStatusCode: Int {
+    case ok = 200
+    case multipleChoices = 300
+    case badRequest = 400
+    case internalServerError = 500
+
     public static let acceptableStatusCodes = 200 ..< 300
 }

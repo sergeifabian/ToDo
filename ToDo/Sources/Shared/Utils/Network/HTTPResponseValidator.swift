@@ -11,7 +11,7 @@ public protocol HTTPResponseValidator {
     func validate(response: HTTPResponse) throws
 }
 
-public final class HTTPResponseValidatorImpl: HTTPResponseValidator {
+public struct HTTPResponseValidatorImpl: HTTPResponseValidator {
     public func validate(response: HTTPResponse) throws {
         guard HTTPStatusCode.acceptableStatusCodes.contains(response.httpURLResponse.statusCode) else {
             throw URLError(.badServerResponse)

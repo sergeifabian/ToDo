@@ -8,19 +8,20 @@
 import Foundation
 
 public protocol HTTPResponseParser {
-    func parse<T: Decodable>(from response: HTTPResponse) throws -> T
     func parse<T: Decodable>(_ type: T.Type, from response: HTTPResponse) throws -> T
 }
 
-public final class HTTPResponseParserImpl: HTTPResponseParser {
+public extension HTTPResponseParser {
+    func parse<T: Decodable>(from response: HTTPResponse) throws -> T {
+        try parse(T.self, from: response)
+    }
+}
+
+public struct HTTPResponseParserImpl: HTTPResponseParser {
     private let jsonDecoder: JSONDecoder
 
     init(jsonDecoder: JSONDecoder) {
         self.jsonDecoder = jsonDecoder
-    }
-
-    public func parse<T: Decodable>(from response: HTTPResponse) throws -> T {
-        try parse(T.self, from: response)
     }
 
     public func parse<T: Decodable>(_ type: T.Type, from response: HTTPResponse) throws -> T {

@@ -7,12 +7,6 @@
 
 import Foundation
 
-public struct HTTPMethod: RawRepresentable {
-    public static let get = HTTPMethod(rawValue: "GET")
-
-    public let rawValue: String
-
-    public init(rawValue: String) {
-        self.rawValue = rawValue
-    }
+public enum HTTPMethod: String {
+    case get = "GET"
 }
